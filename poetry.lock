@@ -4503,26 +4503,7 @@ plotting = ["graphviz", "matplotlib"]
 pyspark = ["cloudpickle", "pyspark", "scikit-learn"]
 scikit-learn = ["scikit-learn"]
 
-[[package]]
-name = "yamllint"
-version = "1.37.1"
-description = "A linter for YAML files."
-optional = false
-python-versions = ">=3.9"
-groups = ["dev"]
-files = [
-    {file = "yamllint-1.37.1-py3-none-any.whl", hash = "sha256:364f0d79e81409f591e323725e6a9f4504c8699ddf2d7263d8d2b539cd66a583"},
-    {file = "yamllint-1.37.1.tar.gz", hash = "sha256:81f7c0c5559becc8049470d86046b36e96113637bcbe4753ecef06977c00245d"},
-]
-
-[package.dependencies]
-pathspec = ">=0.5.3"
-pyyaml = "*"
-
-[package.extras]
-dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
-
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "620648a90ede42d9ff6658c7f7995656dc4f4c2b9b94f7fb18c497f05311682a"
+content-hash = "b4f252b5f336454221ed99f1dd53da54694703c54327c7a32db5951752c940f2"

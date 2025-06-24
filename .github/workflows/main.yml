@@ -24,37 +24,40 @@ jobs:
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.local/bin:$PATH"
+          poetry --version
 
-      - name: 📁 Install dependencies with Poetry
+      - name: 🔁 Auto-fix poetry.lock if needed
         run: |
-          poetry install
+          if ! poetry lock --check; then
+            poetry lock
+          fi
+
+      - name: 📦 Install dependencies with Poetry
+        run: poetry install --no-interaction --no-root
 
       - name: ✨ Run pre-commit hooks
-        run: |
-          poetry run pre-commit run --all-files
+        run: poetry run pre-commit run --all-files
 
       - name: ✏️ Type checking with MyPy
-        run: |
-          poetry run mypy src || true
+        run: poetry run mypy src
 
       - name: 🎨 Lint with Ruff
-        run: |
-          poetry run ruff check src
+        run: poetry run ruff check src
 
-      - name: 🖌️ Format with Black
-        run: |
-          poetry run black --check src
+      - name: 🖌️ Format check with Black
+        run: poetry run black --check src
 
-      - name: ✂️ Sort imports with isort
-        run: |
-          poetry run isort --check-only src
+      - name: ✂️ Check imports order with isort
+        run: poetry run isort --check-only src
 
-      - name: ⚖️ Run unit tests with Pytest
+      - name: ⚖️ Run unit tests with Pytest and Coverage
         run: |
-          poetry run pytest --disable-warnings --maxfail=1
+          poetry run pytest --disable-warnings --maxfail=1 --cov=src --cov-report=xml
 
-      - name: Upload coverage report (if enabled)
+      - name: 📤 Upload coverage report (if enabled)
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
+          path: coverage.xml
