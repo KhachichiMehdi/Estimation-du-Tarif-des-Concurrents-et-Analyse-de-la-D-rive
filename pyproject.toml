@@ -20,6 +20,7 @@ shap = ">=0.41.0,<0.49.0"
 optuna = ">=3.0.0,<4.0.0"
 evidently = ">=0.3.0,<0.8.0"
 scikit-learn = ">=1.2.0,<1.4.0"
+python-box = "^7.3.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.0.0"
@@ -32,6 +33,7 @@ darglint = "^1.8.1"
 pylint = "^3.0.0"
 pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
+types-pyyaml = "^6.0.12.20250516"
 
 
 
@@ -57,3 +59,6 @@ src = ["src"]
 [tool.ruff.lint]
 select = ["E", "F", "B", "I"]
 fixable = ["ALL"]
+
+[tool.mypy]
+disable_error_code = ["import-untyped"]
