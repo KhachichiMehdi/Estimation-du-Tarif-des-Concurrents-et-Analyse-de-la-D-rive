@@ -22,3 +22,5 @@ rad.json
 TestResults.xml
 # pre-commit cache
 .cache/pre-commit
+# Ignore all CSV files in the data directory
+data/*.csv*

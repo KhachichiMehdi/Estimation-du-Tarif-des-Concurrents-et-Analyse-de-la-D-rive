@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import yaml
-from box import ConfigBox
-from box.exceptions import BoxValueError
+from box import ConfigBox  # type: ignore
+from box.exceptions import BoxValueError  # type: ignore
 
 from estimation_tarif import CustomException, logging
 
