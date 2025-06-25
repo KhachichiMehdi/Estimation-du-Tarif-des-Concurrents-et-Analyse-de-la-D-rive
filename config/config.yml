@@ -1,0 +1,4 @@
+data_paths:
+  train: data/X_train.csv.csv
+  test: data/X_test.csv.csv
+  drift: data/X_drift.csv.csv

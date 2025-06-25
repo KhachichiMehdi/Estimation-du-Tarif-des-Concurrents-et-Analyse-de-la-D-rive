@@ -1,5 +1,7 @@
+import os
 from pathlib import Path
 
+import pandas as pd
 import yaml
 from box import ConfigBox  # type: ignore
 from box.exceptions import BoxValueError  # type: ignore
@@ -38,4 +40,48 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         logging.exception(
             f"Unexpected error occurred while loading YAML file: {path_to_yaml}"
         )
+        raise CustomException(e) from e
+
+
+def create_directories(paths: list, verbose=True):
+    """
+    Creates directories if they do not exist.
+
+    Args:
+        paths (list): List of directory paths to create.
+        verbose (bool): If True, logs the creation or existence of directories.
+    """
+    try:
+        for path in paths:
+            if not os.path.exists(path):
+                os.makedirs(path, exist_ok=True)
+                if verbose:
+                    logging.info(f"Directory created: {path}")
+            else:
+                if verbose:
+                    logging.info(f"Directory already exists: {path}")
+    except Exception as e:
+        logging.error(f"Error occurred while creating directories: {e}")
+        raise CustomException(e) from e
+
+
+def load_data(path: Path) -> pd.DataFrame:
+    """
+    Loads data from a CSV file into a pandas DataFrame.
+
+    Args:
+        path (Path): Path to the CSV file.
+
+    Returns:
+        pd.DataFrame: Loaded data as a DataFrame.
+
+    Raises:
+        CustomException: If there is an error loading the data.
+    """
+    try:
+        df = pd.read_csv(path)
+        logging.info(f"Data loaded successfully from {path}")
+        return df
+    except Exception as e:
+        logging.error(f"Error loading data from {path}: {e}")
         raise CustomException(e) from e
