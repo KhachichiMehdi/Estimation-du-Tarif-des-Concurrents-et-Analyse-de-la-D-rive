@@ -1,3 +1,3 @@
-from .config_entity import DataIngestionConfig
+from .config_entity import DataIngestionConfig, DataPreprocessingConfig
 
-__all__ = ["DataIngestionConfig"]
+__all__ = ["DataIngestionConfig", "DataPreprocessingConfig"]
